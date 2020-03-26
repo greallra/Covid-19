@@ -1,38 +1,52 @@
-.App {
+.letter-spacing-xs {
+  letter-spacing: 1px;
+}
+.letter-spacing-s {
+  letter-spacing: 1.3px;
+}
+.letter-spacing-m {
+  letter-spacing: 1.4px;
+}
+.letter-spacing-l {
+  letter-spacing: 1.5px;
+}
+.letter-spacing-xl {
+  letter-spacing: 1.7px;
+}
+h2, h5, h6 {
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+h5 {
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  font-weight: 300;
 }
+h6 {
+  padding: 20px 0 10px 0;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-decoration: underline wavy;
+}
+.iframeCont {
+  min-width: 200px;
+  max-width: 500px;
+  min-height: 150px;
+  max-height: 1000px;
+  margin: auto;
+}
+#iframe {
+  border: none;
+  min-height: 210px;
+  width: 100%;
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+}
+@media only screen and (min-width: 700px) {
+  .iframeCont {
+    min-height: 400px;
+    min-width: 300px;
   }
-}
+  #iframe {
+    min-height: 400px;
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
   }
 }

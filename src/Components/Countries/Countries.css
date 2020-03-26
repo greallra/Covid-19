@@ -1,0 +1,78 @@
+
+/* Mobile */
+/* Mobile = :default
+Process: copy paste all into media query and empty */
+.colCont {
+    position: relative;
+}
+.stat-value {
+    font-size: 1.9rem;
+    font-weight: 900;
+    
+}
+.light-black {
+    color: #43494c;
+}
+.stat-key {
+    font-size: 1.7rem;
+    font-weight: 200;
+    color: #707a7f;
+    /* min-width: 400px; */
+}
+
+table {
+    width: 100%;
+}
+.flag {
+    width: 20px;
+}
+
+td {
+    font-weight: 900;
+}
+
+.active{
+    text-decoration: underline;
+}
+.input-cont {
+    width: 200px;
+   margin: auto;
+}
+input[type=text] {
+    height: 2rem !important;
+}
+/* Desktop */
+@media only screen and (min-width: 700px){
+
+    .colCont {
+    
+    }
+    .stat-value {
+        font-size: 2.2rem;
+        
+    }
+    .light-black {
+    
+    }
+    .stat-key {
+        font-size: 2rem;
+    
+        /* min-width: 400px; */
+    }
+
+    table {
+        width: 100%;
+    }
+    .flag {
+        width: 20px;
+    }
+        th {
+        font-size: 10px;
+    }
+    td {
+        font-size: 10px;
+    }
+    .input-cont {
+    
+    }
+}

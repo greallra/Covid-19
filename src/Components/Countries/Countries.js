@@ -1,7 +1,7 @@
 import React from 'react';
 import {Icon } from 'react-materialize';
 import { Row, Col, Collection, CollectionItem } from 'react-materialize';
-import { getISO } from '../functions';
+import { getISO, convertToReadableString } from '../functions';
 import './Countries.css';
 export default class Countries extends React.Component {
     state = {
@@ -23,7 +23,7 @@ export default class Countries extends React.Component {
             })
             .then(r=>r.json())
             .then(r=>{
-                // console.log("countries",r);
+                console.log("countries",r);
                 const convertNumbers = r.countries_stat.map((o)=>{
                     return {...o,
                             cases: this.checkNumeric(o.cases),
@@ -37,7 +37,7 @@ export default class Countries extends React.Component {
                     }
                 })
                 // console.log(convertNumbers);
-                this.setState({countries_stat: convertNumbers,countries_stat_original: convertNumbers})
+                this.setState({countries_stat: convertNumbers,countries_stat_original: convertNumbers},()=>{this.filterList('cases', false)})
             })
             .catch(err => {
                 console.log(err);
@@ -108,6 +108,7 @@ export default class Countries extends React.Component {
                 }
             })
     }
+    
 
 //https://www.countryflags.io/es/shiny/64.png
     getList = ()=>{
@@ -119,17 +120,22 @@ export default class Countries extends React.Component {
                     if(!ISO) {ISO = o.country_name}
                     let ISOlower = ISO.toLowerCase();
                     let width = !this.state.innerWidth ? window.innerWidth: this.state.innerWidth
-                    let countryNameOrFlag = width > 700 ? o.country_name : <img src={`https://www.countryflags.io/${ISOlower}/shiny/64.png`} className="flag"/>;
+                    let imgUrl = `https://www.countryflags.io/${ISOlower}/shiny/64.png`
+                    if(ISOlower.length > 2){
+                        imgUrl = `https://www.countryflags.io/ad/shiny/64.png`
+                    };
+                    
+                    let countryNameOrFlag = width > 700 ? o.country_name : <img src={imgUrl} className="flag"/>;
                 return <tr index={i}>
                     <td>{countryNameOrFlag}</td>
-                    <td >{o.cases}</td>
-                    <td className="hide-on-small-only">{o.new_cases}</td>
-                    <td>{o.deaths}</td>
-                    <td className="hide-on-small-only">{o.new_deaths}</td>
-                    <td>{o.total_recovered}</td>
-                    <td className="hide-on-small-only">{o.active_cases}</td>
-                    <td className="hide-on-small-only">{o.serious_critical}</td>
-                    <td className="hide-on-small-only">{o.total_cases_per_1m_population}</td>
+                    <td ><span className="cases">{o.cases > 999 ? convertToReadableString(o.cases):o.cases}</span></td>
+                    <td className="hide-on-small-only  new-cases">{o.new_cases > 999 ? convertToReadableString(o.new_cases):o.new_cases}</td>
+                    <td><span className="deaths">{o.deaths > 999 ? convertToReadableString(o.deaths):o.deaths}</span></td>
+                    <td className="hide-on-small-only new-deaths">{o.new_deaths > 999 ? convertToReadableString(o.new_deaths):o.new_deaths}</td>
+                    <td><span className="recovered">{o.total_recovered > 999 ? convertToReadableString(o.total_recovered):o.total_recovered}</span></td>
+                    <td className="hide-on-small-only active-cases">{o.active_cases > 999 ? convertToReadableString(o.active_cases):o.active_cases}</td>
+                    <td className="hide-on-med-and-down">{o.serious_critical > 999 ? convertToReadableString(o.serious_critical):o.serious_critical}</td>
+                    <td className="hide-on-med-and-down">{o.total_cases_per_1m_population > 999 ? convertToReadableString(o.total_cases_per_1m_population):o.total_cases_per_1m_population}</td>
                 </tr>
             })
             
@@ -137,23 +143,17 @@ export default class Countries extends React.Component {
     }
     searchInput = (e)=>{
         let searchText = e.target.value
-        if(searchText.length === 0) {
-           return this.state.countries_stat_original 
-        } else {
-            console.log("not empty");
-            this.setState({countries_stat: []})
-            //get original state and return array 
-            return this.state.countries_stat.filter((o)=>{
-                if(!o.country_name.startsWith(searchText)){
+        //filter the orignal copy of the array: countries_stat_original
+        //Set State on the render copy countries_stat
+        //This way, by not changing the copy ever, we always have access to the orignal array
+            const filtered = this.state.countries_stat_original.filter((o)=>{
+                if(!o.country_name.toLowerCase().startsWith(searchText.toLowerCase())){
                     return false
                 } else {
                     return true
                 }
-            })
-        }
-        // const copy = this.state.countries_stat.slice();
-        // console.log()
-        // this.setState({countries_stat: copy[3]})
+            })    
+            this.setState({countries_stat: filtered})  
     }
     
     render()     
@@ -161,7 +161,7 @@ export default class Countries extends React.Component {
         
         let width = !this.state.innerWidth ? window.innerWidth: this.state.innerWidth
         let isActive = this.state.filterSettings.filterBy
-        return <div>
+        return <div className="table-cont">
             <h6>Countries </h6>
             <div class="input-cont">
             <label for="input_text">Search Country</label><input onChange={(e)=>{this.searchInput(e)}} id="input_text" type="text" data-length="10"/>
@@ -171,53 +171,53 @@ export default class Countries extends React.Component {
         <tbody>
             <tr>
                 <th 
-                onClick={()=>{this.filterList('country_name', this.state.filterSettings.default)}}><span className={isActive === "country_name" ? "active": ""}>{width > 500 ? "Countries": "CN"}</span>
+                onClick={()=>{this.filterList('country_name', this.state.filterSettings.default)}}><span className={isActive === "country_name" ? "active": ""}>{width > 1000 ? "Countries": "CN"}</span>
                     {this.state.filterSettings.default && this.state.filterSettings.filterBy === 'country_name' ? <Icon tiny>arrow_drop_down</Icon>:<Icon tiny>arrow_drop_up</Icon>}
                 </th>
                 <th
                 
                 onClick={()=>{this.filterList('cases', this.state.filterSettings.default)}}
-                ><span className={isActive === "cases" ? "active": ""}>{width > 700 ? "Total Cases": "T Cases"}</span>
+                ><span className={isActive === "cases" ? "active": ""}>{width > 1000 ? "Total Cases": "T Cases"}</span>
                 {this.state.filterSettings.default && this.state.filterSettings.filterBy === 'cases' ? <Icon tiny>arrow_drop_down</Icon>:<Icon tiny>arrow_drop_up</Icon>}
                 </th>
                 <th
                 className="hide-on-small-only"
                 onClick={()=>{this.filterList('new_cases', this.state.filterSettings.default)}}
-                ><span className={isActive === "new_cases" ? "active": ""}>New Cases</span>
+                ><span className={isActive === "new_cases" ? "active": ""}>{width > 1000 ? "New Cases": "N Cases"}</span>
                 {this.state.filterSettings.default && this.state.filterSettings.filterBy === 'new_cases' ? <Icon tiny>arrow_drop_down</Icon>:<Icon tiny>arrow_drop_up</Icon>}
                 </th>
                 <th
                 onClick={()=>{this.filterList('deaths', this.state.filterSettings.default)}}
-                ><span className={isActive === "deaths" ? "active": ""}>{width > 700 ? "Total Deaths": "Deaths"}</span>
+                ><span className={isActive === "deaths" ? "active": ""}>{width > 1000 ? "Total Deaths": "Deaths"}</span>
                 {this.state.filterSettings.default && this.state.filterSettings.filterBy === 'deaths' ? <Icon tiny>arrow_drop_down</Icon>:<Icon tiny>arrow_drop_up</Icon>}
                 </th>
                 <th
                 className="hide-on-small-only"
                 onClick={()=>{this.filterList('new_deaths', this.state.filterSettings.default)}}
-                ><span className={isActive === "new_deaths" ? "active": ""}>New Deaths</span>
+                ><span className={isActive === "new_deaths" ? "active": ""}>{width > 1000 ? "New Deaths": "N Deaths"}</span>
                 {this.state.filterSettings.default && this.state.filterSettings.filterBy === 'new_deaths' ? <Icon tiny>arrow_drop_down</Icon>:<Icon tiny>arrow_drop_up</Icon>}
                 </th>
                 <th
                 onClick={()=>{this.filterList('total_recovered', this.state.filterSettings.default)}}
-                ><span className={isActive === "total_recovered" ? "active": ""}>{width > 700 ? "Total Recovered": "Recovered"}</span>
+                ><span className={isActive === "total_recovered" ? "active": ""}>{width > 1000 ? "Total Recovered": "Recovered"}</span>
                 {this.state.filterSettings.default && this.state.filterSettings.filterBy === 'total_recovered' ? <Icon tiny>arrow_drop_down</Icon>:<Icon tiny>arrow_drop_up</Icon>}
                 </th>
                 <th
                 className="hide-on-small-only"
                 onClick={()=>{this.filterList('active_cases', this.state.filterSettings.default)}}
-                ><span className={isActive === "active_cases" ? "active": ""}>Active Cases</span>
+                ><span className={isActive === "active_cases" ? "active": ""}>{width > 1000 ? "Active Cases": "Active "}</span>
                 {this.state.filterSettings.default && this.state.filterSettings.filterBy === 'active_cases' ? <Icon tiny>arrow_drop_down</Icon>:<Icon tiny>arrow_drop_up</Icon>}
                 </th>
                 <th
-                className="hide-on-small-only"
+                className="hide-on-med-and-down"
                 onClick={()=>{this.filterList('serious_critical', this.state.filterSettings.default)}}
                 ><span className={isActive === "serious_critical" ? "active": ""}>Critical</span>
                 {this.state.filterSettings.default && this.state.filterSettings.filterBy === 'serious_critical' ? <Icon tiny>arrow_drop_down</Icon>:<Icon tiny>arrow_drop_up</Icon>}
                 </th>
                 <th
-                className="hide-on-small-only"
+                className="hide-on-med-and-down"
                 onClick={()=>{this.filterList('total_cases_per_1m_population', this.state.filterSettings.default)}}
-                ><span className={isActive === "total_cases_per_1m_population" ? "active": ""}>Total Cases Per 1m Pop</span>
+                ><span className={isActive === "total_cases_per_1m_population" ? "active": ""}>{width > 1000 ? "Per /1m Pop": "Per 1m "}</span>
                 {this.state.filterSettings.default && this.state.filterSettings.filterBy === 'serious_critical' ? <Icon tiny>arrow_drop_down</Icon>:<Icon tiny>arrow_drop_up</Icon>}
                 </th>
             </tr>
@@ -225,6 +225,8 @@ export default class Countries extends React.Component {
                 {this.getList()}
         </tbody>
         </table>
+        {/* white space */}
+        <div style={{height: '800px'}}></div>
         </div>
     }
 

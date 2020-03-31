@@ -19,28 +19,78 @@ Process: copy paste all into media query and empty */
     color: #707a7f;
     /* min-width: 400px; */
 }
-
+.table-cont {
+    padding: 0 10px;
+}
 table {
+    border: 1px solid rgba(0, 0, 0, 0.12);
     width: 100%;
 }
 .flag {
     width: 20px;
+    margin-left: 5px;
 }
-
-td {
+tr:nth-child(1) {
+    background-color: #e7f7fe;
+}
+tr {
+    background-color: white;
+}
+th {
+    white-space: nowrap;
+    font-size: 13px;
+}
+td:nth-child(1) {
     font-weight: 900;
+    letter-spacing:1.2px;
+    color: black;
+    
 }
-
+.cases, .recovered, .deaths {
+    font-size: 15px;
+  
+    letter-spacing:1.2px;
+  
+}
+.cases {
+    color: #43494c;
+    padding: 10px;
+   
+}
+.active-cases {
+    color: #795548;
+    padding: 10px;
+   
+}
+.new-cases {
+    color: #2196F3;
+    padding: 10px;
+   
+}
+.recovered {
+    color: #4CAF50;
+    padding: 10px;
+   
+}
+.deaths {
+    color: #F44336;
+    padding: 10px; 
+}
+.new-deaths {
+    color: #B00000 ;
+    padding: 10px; 
+}
 .active{
     text-decoration: underline;
 }
 .input-cont {
     width: 200px;
-   margin: auto;
+  
 }
 input[type=text] {
     height: 2rem !important;
 }
+
 /* Desktop */
 @media only screen and (min-width: 700px){
 
@@ -66,11 +116,25 @@ input[type=text] {
     .flag {
         width: 20px;
     }
-        th {
-        font-size: 10px;
+    th {
+    
     }
     td {
-        font-size: 10px;
+        font-size: 15px;
+    }
+    .cases, .recovered, .deaths {
+        font-size: 15px;
+    }
+    .cases {
+
+       
+    }
+    .recovered {
+
+       
+    }
+    .deaths {
+
     }
     .input-cont {
     

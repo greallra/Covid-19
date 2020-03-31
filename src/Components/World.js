@@ -63,7 +63,7 @@ class World extends React.Component {
     }
     getPercent = ()=>{
         
-        return Math.round(this.state.affected_countries.length/199 * 100)
+        return Math.round(this.state.affected_countries.length/200 * 100)
     }
     makeIframe = ()=>{
         return {
@@ -85,7 +85,7 @@ class World extends React.Component {
                 <span className="stat-key letter-spacing-m">Total Recovered</span><b className="green-text stat-value">{this.state.total_recovered}</b>
                 <span className="stat-key letter-spacing-m">New Cases</span><b className="blue-text stat-value">{this.state.new_cases}</b>
                 <span className="stat-key letter-spacing-m">Total Active Cases</span><b className="brown-text stat-value">{this.state.active_cases}</b>   
-                <span className="stat-key letter-spacing-m">Effected Countries</span><b className="grey-text stat-value">{this.state.affected_countries.length} / 199 <i className="grey-text">({this.getPercent()} %)</i></b>
+                {/* <span className="stat-key letter-spacing-m">Effected Countries</span><b className="grey-text stat-value">{this.state.affected_countries.length} / 200 <i className="grey-text">({this.getPercent()} %)</i></b> */}
                 <span className="last-update">(Last Update<Moment format="DD MMMM YYYY HH:mm">{this.state.statistic_taken_at}</Moment>)</span>      
             </div>   
                     <h6>Overall Cases</h6>

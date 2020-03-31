@@ -276,3 +276,23 @@ export function getISO(countryString, lengthOfArray) {
         return countryString;
     }
 }
+
+export function convertToReadableString(n) {
+    let strNsplit = n.toString().split("");
+    //1000
+    if(strNsplit.length == 4){
+        strNsplit.splice(1,0, ',');
+        return strNsplit.join("");
+    }
+    else if(strNsplit.length === 5){
+        strNsplit.splice(2,0, ',');
+        return strNsplit.join("");
+    }
+    else if(strNsplit.length === 6){
+        strNsplit.splice(3,0, ',');
+        return strNsplit.join("");
+    }
+    else{
+        return "N/A"
+    }
+}

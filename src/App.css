@@ -28,7 +28,7 @@ h6 {
   text-decoration: underline wavy;
 }
 .iframeCont {
-  min-width: 200px;
+  min-width: 300px;
   max-width: 500px;
   min-height: 150px;
   max-height: 1000px;
@@ -36,7 +36,7 @@ h6 {
 }
 #iframe {
   border: none;
-  min-height: 210px;
+  min-height: 370px;
   width: 100%;
 
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col,} from 'react-materialize';
-// import Moment from 'react-moment';
+import { keys } from '../keys';
 
 import './World.css';
 import Moment from 'react-moment';
@@ -18,7 +18,7 @@ class World extends React.Component {
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": "coronavirus-monitor.p.rapidapi.com",
-                "x-rapidapi-key": "73b4193dc8msh6e231e05f654c80p1b0db8jsn0c2a8aa64974"
+                "x-rapidapi-key": keys.rapidApiKey
             }
         }
         fetch(url, options)
@@ -43,7 +43,7 @@ class World extends React.Component {
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "coronavirus-monitor.p.rapidapi.com",
-            "x-rapidapi-key": "73b4193dc8msh6e231e05f654c80p1b0db8jsn0c2a8aa64974"
+            "x-rapidapi-key": keys.rapidApiKey
                 }
             })
             .then(response => {

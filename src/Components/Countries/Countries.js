@@ -1,6 +1,6 @@
 import React from 'react';
 import {Icon } from 'react-materialize';
-import { Row, Col, Collection, CollectionItem } from 'react-materialize';
+import { keys } from '../../keys';
 import { getISO, convertToReadableString } from '../functions';
 import './Countries.css';
 export default class Countries extends React.Component {
@@ -18,7 +18,7 @@ export default class Countries extends React.Component {
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-host": "coronavirus-monitor.p.rapidapi.com",
-		"x-rapidapi-key": "73b4193dc8msh6e231e05f654c80p1b0db8jsn0c2a8aa64974"
+		"x-rapidapi-key": keys.rapidApiKey
 	}
             })
             .then(r=>r.json())

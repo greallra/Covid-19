@@ -1,0 +1,138 @@
+<html><head>
+    <title>svgMap demos</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+    <link href="./demo/demo.css" rel="stylesheet">
+    <link href="./dist/svgMap.css" rel="stylesheet">
+    <script src="./dist/svgMap.js"></script>
+  
+    <script src="./demo/functions.js"></script>
+    <script src="./demo/data.js"></script>
+    <script src="./demo/data2.js"></script>
+    <script src="./demo/data3.js"></script>
+    <script src="./demo/iso.js"></script>
+    <script src="./demo/freshStart.js"></script>
+    
+  
+  <body>
+  
+    <div class="demo-wrapper">
+  
+      <!-- Demo GPD -->
+  <!-- 
+      <div class="demo-container">
+        <h2>GDP per capita (PPP)</h2>
+  
+        <div id="svgMapGPD"></div>
+        <script src="../data/gdp.js"></script>
+        <script>
+          new svgMap({
+            targetElementID: 'svgMapGPD',
+            data: svgMapDataGPD
+          });
+        </script>
+      </div> -->
+  
+      <!-- Demo population -->
+  
+      <!-- <div class="demo-container">
+        <h2>Population desity (images as flags)</h2>
+  
+        <div id="svgMapPopulation"></div>
+        <script src="../data/population.js"></script>
+       
+        <script>     
+          new svgMap({
+            targetElementID: 'svgMapPopulation',
+            data: data,
+            colorMax: '#fdd835',
+            colorMin: '#fffde7',
+            flagType: 'image'
+          });
+        </script>
+  
+  
+      </div> -->
+  
+  
+      <!-- Demo person height in German -->
+  
+      <div class="demo-container">
+        <h5><span id="tc" class="spans">Total Cases</span><span id="td" class="spans">Total Deaths</span><span id="nd" class="spans">New Deaths</span></h5>
+        <div class="colourScale">
+          <div><span>1</span></div>
+          <div><span>2</span></div>
+          <div><span>3</span></div>
+          <div><span>4</span></div>
+          <div><span>5</span></div>
+          <div><span>6</span></div>
+          <div><span>7</span></div>
+          <div><span>8</span></div>
+          <div><span>9</span></div>
+          <div><span>10</span></div>
+        </div>
+
+        <div id="target"></div>
+
+        <script>
+            //buttons
+            let tc = document.getElementById('tc');
+            let td = document.getElementById('td');
+            let nd = document.getElementById('nd');
+            let totalCases = document.getElementById('total-cases');
+            let totalDeaths = document.getElementById('total-deaths');
+            let newDeaths = document.getElementById('new-deaths');
+            
+            //by default excute this function with desired data
+            getMap(data3)
+
+            //deaths
+            td.addEventListener('click',()=>{
+              
+                getMap(data2) 
+            })
+            //cases
+            tc.addEventListener('click',()=>{
+       
+                getMap(data) 
+            })
+            nd.addEventListener('click',()=>{
+       
+                getMap(data3) 
+            })
+            // new deaths
+            // td.addEventListener('click',()=>{
+            //     totalCases.style.display = 'none'
+            //     newDeaths.style.display = 'none'
+            //     getMap(data2, 'total-deaths') 
+            // })
+
+        </script>
+        <!-- Dom Stuff -->
+        <script>
+            document.addEventListener('click', (e)=>{
+                td.style.fontSize = '15px'
+                tc.style.fontSize = '15px'
+                nd.style.fontSize = '15px'
+                if(e.target.id === 'td'){
+                    td.style.fontSize = '25px'
+                }
+                if(e.target.id === 'tc'){
+                    tc.style.fontSize = '25px'
+                }
+                if(e.target.id === 'nd'){
+                    nd.style.fontSize = '25px'
+                }
+            })
+        </script>
+  
+      </div> 
+    
+  
+  
+    </div>
+  
+  
+  
+  
+  <div class="svgMap-tooltip svgMap-tooltip-flipped" style="left: 266px; top: 103px;"><div class="svgMap-tooltip-content-wrapper"><div class="svgMap-tooltip-content-container"><div class="svgMap-tooltip-flag-container svgMap-tooltip-flag-container-image"><img class="svgMap-tooltip-flag" src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@latest/svg/ru.svg"></div><div class="svgMap-tooltip-title">Russia</div><div class="svgMap-tooltip-content"><table><tbody><tr><td>Total Cases Recorded</td><td><span>2,337</span></td></tr><tr><td>Population</td><td><span>146,877,088</span></td></tr><tr><td>Gravity</td><td><span>4</span></td></tr></tbody></table></div></div></div><div class="svgMap-tooltip-pointer" style="margin-left: 3px;"></div></div></body></html>

@@ -17,7 +17,7 @@ class App extends React.Component{
 
   render() {
     ReactGA.initialize('UA-129457674-4');
-ReactGA.pageview(window.location.pathname + window.location.search);
+    ReactGA.pageview(window.location.pathname + window.location.search);
     return (
       <div className="App">
         <Nav></Nav>

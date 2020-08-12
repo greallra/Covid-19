@@ -15,10 +15,10 @@ export default class Countries extends React.Component {
     }
     componentDidMount() {
         fetch("https://coronavirus-monitor.p.rapidapi.com/coronavirus/cases_by_country.php", {
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-host": "coronavirus-monitor.p.rapidapi.com",
-		"x-rapidapi-key": keys.rapidApiKey
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "coronavirus-monitor.p.rapidapi.com",
+            "x-rapidapi-key": keys.rapidApiKey
 	}
             })
             .then(r=>r.json())

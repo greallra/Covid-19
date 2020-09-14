@@ -245,13 +245,6 @@ var isoCountries = {
     'ZM' : 'Zambia',
     'ZW' : 'Zimbabwe'
 };
-export function checkNumeric(objName)
-        {
-            var lstLetters = objName;
-
-            var lstReplace = lstLetters.replace(/\,/g,'');
-            return Number(lstReplace);
-        } 
 
 export function getActiveCases(total_cases, total_deaths, total_recovered){
     const activeCases = checkNumeric(total_cases) - (checkNumeric(total_deaths) + checkNumeric(total_recovered))
@@ -296,3 +289,52 @@ export function convertToReadableString(n) {
         return "N/A"
     }
 }
+
+export const getPercent = ()=>{
+    return Math.round(this.state.affected_countries.length/200 * 100)
+}
+
+export const checkNumeric = (objName) =>{
+    var lstLetters = objName;
+
+    var lstReplace = lstLetters.replace(/\,/g,'');
+    return Number(lstReplace);
+}  
+export const tableHeaders = [
+        {desktop: 'Countries',
+         mob: 'CN',
+         tableRow: 'country_name'
+        }, 
+        {desktop: 'Total Cases',
+         mob: 'T Cases',
+         tableRow: 'cases'
+        }, 
+        {desktop: 'Total Deaths',
+         mob: 'N Cases',
+         tableRow: 'deaths'
+        }, 
+        {desktop: 'New Cases',
+         mob: 'Deaths',
+         tableRow: 'new_cases'
+        }, 
+        {desktop: 'New Deaths',
+         mob: 'N Deaths',
+         tableRow: 'new_deaths'
+        }, 
+        {desktop: 'Total Recovered',
+         mob: 'Recovered',
+         tableRow: 'total_recovered'
+        }, 
+        {desktop: 'Active Cases',
+         mob: 'A Cases',
+         tableRow: 'active_cases'
+        }, 
+        {desktop: 'Critical',
+         mob: 'Critical',
+         tableRow: 'serious_critical'
+        }, 
+        {desktop: 'Per /1m Pop',
+         mob: 'Per /1m Pop',
+         tableRow: 'total_cases_per_1m_population'
+        }
+]
